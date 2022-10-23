@@ -1,0 +1,55 @@
+<mat-card>
+  <mat-card-header>
+  </mat-card-header>
+  <div *ngIf="!(error$ | async); else error">
+        <mat-card-content>
+          <form [formGroup]="formGroup">
+            <div class="container"
+                 fxLayout
+                 fxLayoutAlign="left center"
+                 fxLayoutGap="5px">
+
+              <span [matTooltip]="tooltip_disabled"
+                    [matTooltipDisabled]="!(noValidWebhook$ | async)">
+                <mat-slide-toggle
+                  [matTooltip]="tooltip_disable_webhook"
+                  [matTooltipDisabled]="(noValidWebhook$ | async)"
+                  formControlName="webhookActive">
+                  {{'SETTINGS.DISABLE_WEBHOOK' | translate}}
+                </mat-slide-toggle>
+              </span>
+            </div>
+            <div class="container"
+                 fxLayout
+                 fxLayoutAlign="left"
+                 fxLayoutGap="5px">
+              <span [matTooltip]="tooltip_disabled"
+                    [matTooltipDisabled]="!(noValidWebhook$ | async)">
+                <mat-slide-toggle [matTooltip]="tooltip_automatically_process"
+                                  [matTooltipDisabled]="(noValidWebhook$ | async)"
+                                  formControlName="automaticallyProcessBtcChatsIfWebhookSucceeds">
+                  {{'SETTINGS.AUTOMATICALLY_PROCESS' | translate}}
+                </mat-slide-toggle>
+              </span>
+            </div>
+          </form>
+        </mat-card-content>
+        <mat-card-actions>
+          <span [matTooltip]="tooltip_disabled"
+                [matTooltipDisabled]="!(noValidWebhook$ | async)">
+            <button mat-raised-button color="primary"
+                    [matTooltip]="tooltip_save"
+                    [disabled]="!!(noValidWebhook$ | async)"
+                    (click)="updateSettings()">
+              {{'SETTINGS.UPDATE_WEBHOOK_ACTIVATION_SETTINGS' | translate }}
+            </button>
+          </span>
+        </mat-card-actions>
+  </div>
+  <ng-template #error>
+    <span>{{'SETTINGS.ERROR_MESSAGE' | translate}}</span>
+  </ng-template>
+  <mat-card-footer>
+    <mat-progress-bar *ngIf="(updating$ | async) || (loading$ | async)" mode="indeterminate"></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>

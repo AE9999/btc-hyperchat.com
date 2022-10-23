@@ -1,0 +1,30 @@
+<mat-toolbar>
+  <span>{{'MY_RECEIVED_BTC_CHATS.TITLE' | translate}}</span>
+</mat-toolbar>
+<mat-card>
+  <mat-card-content>
+    <div *ngIf="!(error$ | async); else error">
+      <div *ngIf="hasMyReceivedBtcChats$ | async; else empty">
+        <mat-card>
+          <mat-card-content>
+            <cdk-virtual-scroll-viewport autosize class="viewport" itemSize="50">
+              <div *cdkVirtualFor="let myReceivedBtcChat of myReceivedBtcChats$ | async">
+                <app-my-received-btc-chat [myReceivedBtcChat]="myReceivedBtcChat"></app-my-received-btc-chat>
+                <mat-divider></mat-divider>
+              </div>
+            </cdk-virtual-scroll-viewport>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <ng-template #empty>
+        <p>{{'MY_RECEIVED_BTC_CHATS.NO_UNPROCESSED_CHATS' | translate}}</p>
+      </ng-template>
+    </div>
+    <ng-template #error>
+      <p>{{'MY_RECEIVED_BTC_CHATS.ERROR_SCREEN' | translate}}</p>
+    </ng-template>
+  </mat-card-content>
+  <mat-card-footer>
+    <mat-progress-bar *ngIf="loading$ | async" mode="indeterminate"></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>

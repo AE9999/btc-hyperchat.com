@@ -1,0 +1,230 @@
+{
+  "MENU": {
+    "APP_NAME": "BTC-HyperChat",
+    "HOME": "Info",
+    "REGISTER_BTC_CHAT": "Send BTC-HyperChat",
+    "REGISTER_ACCOUNT": "Register Account / Login",
+    "LOG_OUT": "Logout",
+    "READ": "Read your BTC-HyperChats",
+    "SETTINGS": "Settings",
+    "TOOLTIP_HOME": "Information about BTC-HyperChat.com.",
+    "TOOLTIP_REGISTER_BTC_CHAT": "Send a BTC-HyperChat to someone.",
+    "TOOLTIP_READ_CHATS": "Read your received BTC-HyperChats.",
+    "TOOLTIP_SETTINGS": "Manage your account and webhooks.",
+    "TOOLTIP_REGISTER": "Register a BTC-HyperChat account.",
+    "TOOLTIP_LOGOUT": "Logout.",
+    "APPLICATION_TITLE": "BTC-HyperChat"
+  },
+  "HOME": {
+    "TITLE": "Welcome to BTC-HyperChat.com",
+    "EXPLANATION": {
+      "TITLE": "What is BTC-HyperChat.com?",
+      "BODY": "BTC-HyperChat.com is an open source, Bitcoin based, Web application which allows users to get payed (in  Bitcoin) to receive and (possibly automatically) handle messages. It was developed to integrate with the <a href='https://streamlabs.com/'>streamlabs</a> but any one using software that allows for 'webhooks' or 'callbacks' can integrate it."
+    },
+    "GUI_ONLY": {
+      "TITLE": "I don't use Streamlabs, have any 'webhooks' or 'callbacks' available, can I still use this app?",
+      "BODY": "Yes. BTC-HyperChat.com has a web interface to keep to keep track of send messages and a method of tracking to determine if you've responded to them."
+    },
+    "WHY_SHOULD_I_USE": {
+      "TITLE": "Why should I use BTC-HyperChat.com?",
+      "BODY": "BTC-HyperChat.com provides users with an easy way to bypass censors and mainstream payment processors, allowing creators to keep the bulk of their own donations. Users will get their own accounts on our BtcPay Server. These accounts will be provided with default wallets. However if users so choose they can install their own wallets, giving them autonomy over all received donations. "
+    },
+    "HOW_DOES_IT_WORK":{
+      "TITLE": "How does BTC-HyperChat.com work?",
+      "BODY": "BTC-HyperChat.com is an open source <a href=https://www.rust-lang.org/>Rust</a> Web application. Its code will be made available <a href=https://github.com/AE9999/btc-hyperchat.com>here</a>. BTC-HyperChat.com leverages the well known open source BTC payment processor <a href=https://btcpayserver.org/>BtcPay</a>. Authentication & Authorization is done through <a href='https://www.keycloak.org/'>Keycloak</a>. Our BtcPay instance generates invoices for each message and keeps track of their payment status. Once a transaction has been broadcast declaring payment for the invoice, our web app will inform the user of this message. Per user settings, this notification will be done either in our app or by webhook."
+    },
+    "HOW_MUCH_DOES_IT_COST":{
+      "TITLE": "What are the costs of using BTC-HyperChat.com?",
+      "BODY": "<empty>"
+    },
+    "WHAT_DOES_A_DONATION_PAGE_LOOK_LIKE": {
+      "TITLE": "What does a BTC-HyperChat.com donation profile page look like?",
+      "BODY": "<empty>"
+    },
+    "HOW_DO_I_REGISTER" : {
+      "TITLE": "How do I register an account at BTC-HyperChat.com?",
+      "BODY": "You can register an account by clicking the 'Register Account' button in the top menu bar.</a>."
+    },
+    "CAN_I_RUN_MY_OWN_INSTANCE" : {
+      "TITLE": "Can I run my own BTC-HyperChat.com instance?",
+      "BODY": "Yes. BTC-HyperChat.com is open source software licenced under the Apache 2.0 Licence. The source code will be made available <a href=https://github.com/AE9999/btc-hyperchat.com>here</a>. Contact us at our <a href=\"https://t.me/+Sw1M62C3bNw3YzFk\">telegram channel<a/> for terms on providing support."
+    },
+    "PRIVACY_POLICY" : {
+      "TITLE": "<EMPTY>",
+      "BODY": "<EMPTY>"
+    },
+    "TERMS_OF_SERVICE" : {
+      "TITLE": "<EMPTY>",
+      "BODY": "<EMPTY>"
+    }
+  },
+  "REGISTER": {
+    "NAME": "Sender name",
+    "YOUR_NAME": "Your name",
+    "SEND_ANONYMOUSLY": "Send anonymously",
+    "AMOUNT": "Donation amount",
+    "AMOUNT_DEFAULT": 1,
+    "CURRENCY": "Currency",
+    "MESSAGE_LABEL": "Message",
+    "MESSAGE_PLACEHOLDER": "Type your message here.",
+    "TOA": "By clicking the send button, you agree to our ",
+    "TOA_LINK": "<a href=\"#/tos\">Terms of Service</a>",
+    "TIP": "Send a message to: ",
+    "REQUIRED_AMOUNT": "Please enter a (round) amount between 1 and 1000, i.e 5",
+    "REQUIRED_SENDER": "Please enter a sender name of at least two chars or toggle 'Send anonymously'",
+    "ERROR_SCREEN": "Could not load profile, try again later."
+  },
+  "MY_RECEIVED_BTC_CHATS" : {
+    "TITLE": "My received, unprocessed BTC-HyperChats",
+    "ANONYMOUS_SENDER": "Anonymous sender",
+    "MARK_AS_PROCESSED": "Mark BTC-HyperChat as processed",
+    "NO_MESSAGE": "No message.",
+    "NO_AMOUNT": "xxx",
+    "FROM": "From: ",
+    "AMOUNT": "Amount: ",
+    "MESSAGE": "Message: ",
+    "NO_UNPROCESSED_CHATS": "You have no unprocessed chats.",
+    "ERROR_SCREEN": "Something Went wrong try again later.",
+    "RECEIVED_AT": "Received at:"
+  },
+  "SETTINGS": {
+    "TITLE": "Settings",
+    "CONFIGURATION_TAB_TITLE": "Webhook Configuration",
+    "ACTIVATION_TAB_TITLE": "Webhook Activation",
+    "TEST_TAB_TITLE": "Test Webhook",
+    "BTC_PAY_TITLE": "BtcPay Settings",
+    "ACCOUNT_TITLE": "Account Settings",
+    "CONFIGURATION_URL_TAB_TITLE": "Url",
+    "CONFIGURATION_HEADERS_TAB_TITLE": "Headers",
+    "CONFIGURATION_DATA_TAB_TITLE": "Data",
+    "CONFIGURATION_QUERY_TAB_TITLE": "Query Parameters",
+    "WEB_HOOK_SETTINGS_EXPLANATION_1": "<p>Please use this screen to setup what data should be provided to your webhook and how. By default we initialized accounts to use the webhook provided by <a href='https://dev.streamlabs.com/reference/donations-1'>streamlabs</a>.</p><p>Below is a JSON description of the data available for each Btc-HyperChat you will receive.</p>",
+    "WEB_HOOK_SETTINGS_EXPLANATION_2": "<p>You can refer to fields of a received chat in the configuration by using <i>{{FIELD_NAME}}</i>. I.e. <i>{{message}}</i> will evaluate to <i>TEST_MESSAGE</i> for the above example.</p><p>At the bottom of this screen is a curl command which is the equivalent of how Btc-HyperChat will call your webhook given your current configuration and the JSON example provided above.</p>",
+    "UPDATE_WEBHOOK_EDITOR_SETTINGS" : "Save",
+    "UPDATE_WEBHOOK_EDITOR_CLEAR": "Clear",
+    "UPDATE_WEBHOOK_ACTIVATION_SETTINGS": "Save",
+    "WEB_HOOK_TEST_BUTTON": "Test webhook",
+    "WEBHOOK_URL": "Webhook Url",
+    "WEBHOOK_URL_PLACEHOLDER": "https://your-server.com/webhook",
+    "INVALID_WEBHOOK": "This is an invalid url",
+    "DISABLE_WEBHOOK": "Enable Webhook",
+    "ERROR_MESSAGE": "Could not load settings, try again later.",
+    "AUTOMATICALLY_PROCESS": "Use Webhook only",
+    "AUTOMATICALLY_PROCESS_ERROR": "Please provide a valid webhook and enable it.",
+    "EXAMPLE_CURL": "Curl equivalent",
+    "WEBHOOK_HEADERS_TITLE": "Currently configured headers:",
+    "WEBHOOK_HEADERS_EXPLANATION": "Please set your headers here",
+    "WEBHOOK_HEADERS_ADD_BUTTON_VALUE": "Add header",
+    "WEBHOOK_DATA_TITLE": "Currently configured data attributes:",
+    "WEBHOOK_DATA_EXPLANATION": ", the following fields are available ..",
+    "WEBHOOK_DATA_ADD_BUTTON_VALUE": "Add data element",
+    "WEBHOOK_QUERY_TITLE": "Currently configured query attributes:",
+    "WEBHOOK_QUERY_EXPLANATION": ", the following fields are available",
+    "WEBHOOK_QUERY_ADD_BUTTON_VALUE": "Add query element",
+    "WEBHOOK_HEADERS_PLACEHOLDER_NAME": "Header Name",
+    "WEBHOOK_HEADERS_PLACEHOLDER_VALUE": "Header Value  i.e. {{sender}}",
+    "WEBHOOK_DATA_PLACEHOLDER_NAME": "Data Attribute Name",
+    "WEBHOOK_DATA_PLACEHOLDER_VALUE": "Data Attribute Value i.e. {{sender}}",
+    "WEBHOOK_QUERY_PLACEHOLDER_NAME": "Query Parameter Name",
+    "WEBHOOK_QUERY_PLACEHOLDER_VALUE": "Query Parameter Value i.e. {{sender}}",
+    "WEBHOOK_HEADERS_NO_ATTRIBUTES": "No Headers are configured",
+    "WEBHOOK_DATA_NO_ATTRIBUTES": "No Data Attributes are configured",
+    "WEBHOOK_QUERY_NO_ATTRIBUTES": "No Query Parameters are configured",
+    "WEBHOOK_URL_REQUIRED": "There is an error in the url configuration.",
+    "WEBHOOK_HEADER_CONFIGURATION_ERROR": "Please finish the header configuration or delete any empty entries.",
+    "WEBHOOK_DATA_CONFIGURATION_ERROR": "Please finish the data configuration or delete any empty entries.",
+    "WEBHOOK_QUERY_CONFIGURATION_ERROR": "Please finish the query configuration or delete any empty entries.",
+    "CONFIGURATION_CALL_TYPE_TAB_TITLE": "Post Type",
+    "CONFIGURATION_TAB_TITLE_TOOLTIP": "Use this tab to configure your webhook",
+    "ACTIVATION_TAB_TITLE_TOOLTIP": "Use this tab to enable / disable your webhook",
+    "TEST_TAB_TITLE_TOOLTIP": "Use this tab to test your webhook with testdata.",
+    "CONFIGURATION_TAB_URL_TOOLTIP": "Use this tab to set the URL where your webhook is located.",
+    "CONFIGURATION_TAB_CALL_TYPE_TOOLTIP": "Use this tab to determine which kind of post your webhook expects.",
+    "CONFIGURATION_TAB_DATA_TOOLTIP": "Use this tab to set which data your webhook expects.",
+    "CONFIGURATION_TAB_HEADERS_TOOLTIP": "Us this tab to set any additional headers on the post call.",
+    "CONFIGURATION_TAB_QUERY_TOOLTIP": "Use this tab to set any query parameters in the url of your webhook.",
+    "CONFIGURATION_TAB_CLEAR_TOOLTIP": "Use this to clear any settings and disable the webhook.",
+    "CONFIGURATION_TAB_SAVE_TOOLTIP": "Before you can save you need to provide a valid url, a post method and have no pending errors.",
+    "CONFIGURATION_TAB_SAVE_SAVE_TOOLTIP": "Save your current settings",
+    "ACTIVATION_TAB_TOOLTIP": "Configure a webhook to enable these settings.",
+    "TEST_TAB_TOOLTIP": "Configure a webhook before testing.",
+    "ACCOUNT_TITLE_TOOLTIP": "Configur your account settings",
+    "ACTIVATION_TAB_TOOLTIP_DISABLE_WEBHOOK": "If set to true, we will call your webhook for each Btc-HyperChat you receive",
+    "ACTIVATION_TAB_TOOLTIP_AUTOMATICALLY_PROCESS": "If set to true, you will not receive any Btc-HyperChat in this webapp, we will only call your webhook.",
+    "ACTIVATION_TAB_TOOLTIP_SAVE": "Save your current settings",
+    "TEST_TAB_TOOLTIP_TEST_BUTTON": "By clicking this button we will send a test call to your configured webhook.",
+    "BTCPAY_LOG_IN_PAGE": "The use BtcPay instance is available ",
+    "BTCPAY_YOUR_CREDENTIALS_ARE": "Your credentials for this server are:",
+    "BTCPAY_ACCOUNT_SUMMARY": "<ul><li>Username: '{{username}}'</li><li>Initial password: '{{initialPassword}}'</li></ul>",
+    "BTC_PAY_TITLE_TOOLTIP": "Your BtcPay Settings.",
+    "BTCPAY_PLEASE_CHANGE": "After login, please change the initial password in the BtcPayServer ASAP at account/changepassword",
+    "BTCPAY_RESET_ACCOUNT": "Reset BtcPay Password",
+    "BTCPAY_RESET_ACCOUNT_TOOLTIP": "By clicking here your BtcPay password will be reset. The new, initial password will be shown in this screen.",
+    "ACCOUNT_DELETE_ACCOUNT_TEXT": "Click the below button to start the process of deleting your BTC-HyperChat account",
+    "TOOLTIP_DELETE_ACCOUNT": "Click here to delete your BTC-HyperChat account. Warning IRREVERSIBLE",
+    "DELETE_ACCOUNT": "Delete Account",
+    "CURL_COMMAND_PLACE_HOLDER": "Please provide a valid url & Post Method for us to calculate the curl equivalent.",
+    "ACCOUNT_DELETION_CONFIRM_NO_MATCH": "You did not type 'DELETE' canceling process",
+    "STARTING_DELETION_PROCESS": "Starting the deletion, please wait."
+  },
+  "FIND_PROFILE" : {
+    "ERROR_SCREEN": "Could not load find screen",
+    "TITLE": "Find a creator to send a BTC-HyperChat to",
+    "SEARCH_FOR_CREATOR": "Search for a creator",
+    "MOST_POPULAR_CREATORS": "The current most popular creators",
+    "SEARCH_PLACE_HOLDER": "Creator name",
+    "CLICK": "Go to profile",
+    "CLICK_TOOLTIP": "Visit the selected profile."
+  },
+  "PROFILE_EFFECT": {
+    "LOADING_ERROR": "Could not load profile."
+  },
+  "REGISTER_BTC_CHAT_EFFECT": {
+    "GENERATING_INVOICE": "Generating BtcPay invoice",
+    "SENDING_MESSAGE": "Sending BTC-HyperChat. This can take a few seconds. Please wait",
+    "INVOICE_PAYED": "Your invoice was payed!",
+    "INVOICE_CANCELED": "",
+    "ERROR": "Could not generate invoice. Please try again later."
+  },
+  "MY_RECEIVED_BTC_CHATS_EFFECT": {
+    "QUERY_ERROR": "Could not load your received BTC-Chats.",
+    "PROCESS_MY_RECEIVED_BTC_CHAT_ERROR": "Error marking chat as processed, please try again later.",
+    "PROCESS_MY_RECEIVED_BTC_CHAT_OK": "Chat marked as processed."
+  },
+  "SETTINGS_EFFECT": {
+    "LOADING_ERROR": "Could not load your settings, please try again later.",
+    "PATCHING_ERROR": "Could not update your settings, please try again later.",
+    "PATCHING_SUCCESSFUL": "New settings saved.",
+    "WEBHOOK_TEST_OK": "Webhook works!",
+    "WEBHOOK_TEST_FAILURE": "Webhook at provided Url did not respond with a 200 OK code.",
+    "WEBHOOK_TEST_ERROR": "We experienced an error while calling the webhook, please try again later.",
+    "LOADING_TEST_BTC_CHAT_ERROR": "Could not load test chat apologies ..",
+    "ACCOUNT_DELETED_OK": "Your account has been successfully deleted. Logging out.",
+    "DELETE_ACCOUNT_ERROR": "An error occurred while deleting your account. Please try again later.",
+    "GET_BTC_PAY_CONFIG_ERROR": "Could not load your BtcPay Config, please try again laters",
+    "RESET_PASSWORD_OK": "Your Password has been reset" ,
+    "RESET_PASSWORD_ERROR": "There was an problem resseting your password. Please try again later"
+  },
+  "SEARCH_PROFILES_EFFECT": {
+    "LOADING_ERROR": "Could not load profiles, please try again later."
+  },
+  "TOP_PROFILES_EFFECT": {
+    "LOADING_ERROR": "Could not load top profiles, please try again later."
+  },
+  "TOS": {
+    "TITLE": "Algemene Voorwaarden",
+    "CONTENT": "<EMPTY>"
+  },
+  "PRIVACY": {
+    "TITLE": "Privacybeleid",
+    "CONTENT": "<EMPTY>"
+  },
+  "CONFIRM_ACCOUNT_DELETION": {
+    "TITLE": "Confirm Account Deletion",
+    "EXPLANATION": "In order to confirm your account deletion, type 'DELETE' in the below input and click 'Ok'",
+    "CANCEL": "Cancel",
+    "OK": "Ok",
+    "LABEL": "Confirmation"
+  }
+
+}

@@ -1,0 +1,45 @@
+<!-- based on https://www.freakyjolly.com/mat-autocomplete-with-http-api-remote-search-results/ -->
+
+
+<mat-card>
+  <mat-card-title>{{'FIND_PROFILE.SEARCH_FOR_CREATOR' | translate}}</mat-card-title>
+  <mat-card-content>
+    <form>
+    <div class="container"
+         fxLayout
+         fxLayoutAlign="left center"
+         fxLayoutGap="5px">
+
+      <input matInput
+             [formControl]="control"
+             [matAutocomplete]="auto"
+             [placeholder]="'FIND_PROFILE.SEARCH_PLACE_HOLDER' | translate">
+
+    </div>
+
+    <mat-autocomplete #auto="matAutocomplete"
+                      [panelWidth]="400"
+                      [displayWith]="displayWith">
+      <ng-container *ngIf="!(loading$ | async)">
+        <mat-option *ngFor="let profileName of (profileNames$ | async)" [value]="profileName">
+          <span><b>{{profileName}}</b></span>
+        </mat-option>
+      </ng-container>
+    </mat-autocomplete>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button
+            [matTooltip]="tooltip_click"
+            color="primary"
+            [disabled] = "inValidProfileSelected()"
+            [routerLink]="'/tip/' + getSelectedProfile()">
+      {{'FIND_PROFILE.CLICK' | translate }}
+    </button>
+  </mat-card-actions>
+  <mat-card-footer>
+    <mat-progress-bar *ngIf="loading$ | async" mode="indeterminate"></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>
+
+

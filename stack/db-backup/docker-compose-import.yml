@@ -1,0 +1,19 @@
+version: '3.7'
+services:
+  #
+  # BEGIN IMPORTER CONFIG
+  #
+  date-importer:
+    image: ubuntu
+    volumes:
+      - ${BACKUP_DIR}:/backupDir
+      - my_external_volume:/target
+    command: sh -c "cp /backupDir/backup.tar /target && cd /target && tar xf backup.tar && rm backup.tar && cd target && mv * ../ && cd ../ && rmdir target "
+  #
+  # END IMPORTER CONFIG
+  #
+
+volumes:
+  my_external_volume :
+    name: ${POSTGRES_VOLUME}
+    external: true

@@ -1,0 +1,186 @@
+
+  <mat-card>
+    <mat-card-header>
+<!--      <mat-card-title><span>{{'SETTINGS.WEB_HOOK_SETTINGS_TITLE' | translate}}</span></mat-card-title>-->
+    </mat-card-header>
+    <div *ngIf="!(error$ | async); else error">
+      <mat-card-content>
+        <p>
+          <span [innerHtml]="'SETTINGS.WEB_HOOK_SETTINGS_EXPLANATION_1' | translate"></span>
+        </p>
+
+        <pre>
+            <code>{{ exampleBtcChatString$ | async }}</code>
+        </pre>
+
+        <p>
+          <span [innerHtml]="'SETTINGS.WEB_HOOK_SETTINGS_EXPLANATION_2' | translate"></span>
+        </p>
+
+        <mat-tab-group>
+
+          <mat-tab dynamicHeight>
+            <ng-template mat-tab-label>
+              <label  class="labelHeading"
+                      [matTooltip]="tooltip_url"
+                      matTooltipClass="example-tooltip-red1">
+                  {{'SETTINGS.CONFIGURATION_URL_TAB_TITLE' | translate}}
+              </label>
+            </ng-template>
+
+            <div class="container"
+                 fxLayout="column"
+                 fxLayoutAlign="left"
+                 fxLayoutGap="5px">
+              <app-url-input #urlInput
+                             (nextValue)="nextUrl($event)">
+              </app-url-input>
+            </div>
+          </mat-tab>
+
+          <mat-tab dynamicHeight>
+            <ng-template mat-tab-label>
+              <label  class="labelHeading"
+                      [matTooltip]="tooltip_calltype"
+                      matTooltipClass="example-tooltip-red1">
+                {{'SETTINGS.CONFIGURATION_CALL_TYPE_TAB_TITLE' | translate}}
+              </label>
+            </ng-template>
+
+            <div class="container"
+                 fxLayout
+                 fxLayoutAlign="left"
+                 fxLayoutGap="5px">
+              <app-post-type-input #postType
+                                  (nextValue)="nextPostType($event)">
+              </app-post-type-input>
+
+            </div>
+          </mat-tab>
+
+          <mat-tab dynamicHeight>
+            <ng-template mat-tab-label>
+              <label  class="labelHeading"
+                      [matTooltip]="tooltip_data"
+                      matTooltipClass="example-tooltip-red1">
+                {{'SETTINGS.CONFIGURATION_DATA_TAB_TITLE' | translate}}
+              </label>
+            </ng-template>
+
+            <div class="container"
+                 fxLayout
+                 fxLayoutAlign="left"
+                 fxLayoutGap="5px">
+              <app-dynamic-list #dataConfig
+                                [titleKey]="'SETTINGS.WEBHOOK_DATA_TITLE'"
+                                [explanationKey]="'SETTINGS.WEBHOOK_DATA_EXPLANATION'"
+                                [addKey]="'SETTINGS.WEBHOOK_DATA_ADD_BUTTON_VALUE'"
+                                [namePlaceholderKey]="'SETTINGS.WEBHOOK_DATA_PLACEHOLDER_NAME'"
+                                [valuePlaceholderKey]="'SETTINGS.WEBHOOK_DATA_PLACEHOLDER_VALUE'"
+                                [noAttributeKey]="'SETTINGS.WEBHOOK_DATA_NO_ATTRIBUTES'"
+                                [configAttribute]="'dataAttributes'"
+                                (nextValue)="nextData($event)">
+              </app-dynamic-list>
+            </div>
+          </mat-tab>
+
+
+          <mat-tab dynamicHeight>
+            <ng-template mat-tab-label>
+              <label  class="labelHeading"
+                      [matTooltip]="tooltip_headers"
+                      matTooltipClass="example-tooltip-red1">
+                {{'SETTINGS.CONFIGURATION_HEADERS_TAB_TITLE' | translate}}
+              </label>
+            </ng-template>
+
+            <div class="container"
+                 fxLayout
+                 fxLayoutAlign="left"
+                 fxLayoutGap="5px">
+              <app-dynamic-list #headerConfig
+                                [titleKey]="'SETTINGS.WEBHOOK_HEADERS_TITLE'"
+                                [explanationKey]="'SETTINGS.WEBHOOK_HEADERS_EXPLANATION'"
+                                [addKey]="'SETTINGS.WEBHOOK_HEADERS_ADD_BUTTON_VALUE'"
+                                [namePlaceholderKey]="'SETTINGS.WEBHOOK_HEADERS_PLACEHOLDER_NAME'"
+                                [valuePlaceholderKey]="'SETTINGS.WEBHOOK_HEADERS_PLACEHOLDER_VALUE'"
+                                [noAttributeKey]="'SETTINGS.WEBHOOK_HEADERS_NO_ATTRIBUTES'"
+                                [configAttribute]="'headerAttributes'"
+                                (nextValue)="nextHeaders($event)">
+
+              </app-dynamic-list>
+            </div>
+          </mat-tab>
+
+          <mat-tab dynamicHeight>
+            <ng-template mat-tab-label>
+              <label  class="labelHeading"
+                      [matTooltip]="tooltip_query"
+                      matTooltipClass="example-tooltip-red1">
+                {{'SETTINGS.CONFIGURATION_QUERY_TAB_TITLE' | translate}}
+              </label>
+            </ng-template>
+            <div class="container"
+                 fxLayout
+                 fxLayoutAlign="left"
+                 fxLayoutGap="5px">
+              <app-dynamic-list #queryConfig
+                                [titleKey]="'SETTINGS.WEBHOOK_QUERY_TITLE'"
+                                [explanationKey]="'SETTINGS.WEBHOOK_QUERY_EXPLANATION'"
+                                [addKey]="'SETTINGS.WEBHOOK_QUERY_ADD_BUTTON_VALUE'"
+                                [namePlaceholderKey]="'SETTINGS.WEBHOOK_QUERY_PLACEHOLDER_NAME'"
+                                [valuePlaceholderKey]="'SETTINGS.WEBHOOK_QUERY_PLACEHOLDER_VALUE'"
+                                [noAttributeKey]="'SETTINGS.WEBHOOK_QUERY_NO_ATTRIBUTES'"
+                                [configAttribute]="'queryAttributes'"
+                                (nextValue)="nextQuery($event)">
+              </app-dynamic-list>
+            </div>
+          </mat-tab>
+
+        </mat-tab-group>
+
+        <mat-divider></mat-divider>
+
+        <mat-error *ngIf="hasUrlError">
+          {{ 'SETTINGS.WEBHOOK_URL_REQUIRED' | translate }}
+        </mat-error>
+        <mat-error *ngIf="hasHeaderConfigError">
+          {{ 'SETTINGS.WEBHOOK_HEADER_CONFIGURATION_ERROR' | translate }}
+        </mat-error>
+        <mat-error *ngIf="hasBodyConfigError">
+          {{ 'SETTINGS.WEBHOOK_DATA_CONFIGURATION_ERROR' | translate }}
+        </mat-error>
+        <mat-error *ngIf="hasQueryConfigError">
+          {{ 'SETTINGS.WEBHOOK_QUERY_CONFIGURATION_ERROR' | translate }}
+        </mat-error>
+
+        <mat-divider></mat-divider>
+
+        <app-curl-demo #curlDemo [currentCommand$]="currentCommand$"></app-curl-demo>
+
+      </mat-card-content>
+      <mat-card-actions>
+        <span [matTooltip]="tooltip_save_disabled"
+              [matTooltipDisabled]="!hasError && !(updating$ | async) && !!(currentValueCorrect$) && (currentValueCorrect$ | async)">
+          <button mat-raised-button color="primary"
+                  [disabled]="hasError || !(currentValueCorrect$) || (updating$ | async) || !(currentValueCorrect$ | async)"
+                  [matTooltip]="tooltip_save"
+                  (click)="updateSettings()">
+            {{'SETTINGS.UPDATE_WEBHOOK_EDITOR_SETTINGS' | translate }}
+          </button>
+        </span>
+        <button mat-raised-button color="primary"
+                [matTooltip]="tooltip_clear"
+                (click)="clearSettings()">
+          {{'SETTINGS.UPDATE_WEBHOOK_EDITOR_CLEAR' | translate }}
+        </button>
+      </mat-card-actions>
+    </div>
+    <ng-template #error>
+      <span>{{'SETTINGS.ERROR_MESSAGE' | translate}}</span>
+    </ng-template>
+    <mat-card-footer>
+      <mat-progress-bar *ngIf="(updating$ | async) || (loading$ | async)" mode="indeterminate"></mat-progress-bar>
+    </mat-card-footer>
+  </mat-card>
+

@@ -1,0 +1,21 @@
+<mat-card>
+  <mat-card-title>{{'FIND_PROFILE.MOST_POPULAR_CREATORS' | translate}}</mat-card-title>
+  <mat-card-content>
+    <div *ngIf="!(error$ | async); else error">
+      <mat-list role="list">
+        <mat-list-item *ngFor="let profileName of profileNames$ | async">
+          <a [routerLink]="'/tip/' + profileName">
+            <span>{{profileName}}</span>
+          </a>
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <ng-template #error>
+      <p>{{'FIND_PROFILE.ERROR_SCREEN' | translate}}</p>
+    </ng-template>
+
+  </mat-card-content>
+  <mat-card-footer>
+    <mat-progress-bar *ngIf="topProfilesLoading$ | async" mode="indeterminate"></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>

@@ -1,0 +1,34 @@
+<mat-card>
+  <mat-card-content>
+    <div class="container"
+         fxLayout
+         fxLayoutAlign="left"
+         fxLayoutGap="10px">
+
+      <mat-toolbar>
+        <span>{{'FIND_PROFILE.TITLE' | translate}}</span>
+      </mat-toolbar>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="container"
+         fxLayout
+         fxLayoutAlign="left"
+         fxLayoutGap="10px">
+      <app-search-profile-autocomplete></app-search-profile-autocomplete>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="container"
+         fxLayout
+         fxLayoutAlign="left"
+         fxLayoutGap="10px">
+      <app-top-profiles></app-top-profiles>
+    </div>
+
+  </mat-card-content>
+</mat-card>
+
+

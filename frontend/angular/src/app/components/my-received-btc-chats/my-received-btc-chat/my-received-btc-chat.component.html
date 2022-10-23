@@ -1,0 +1,16 @@
+<mat-card>
+  <mat-card-title>{{'MY_RECEIVED_BTC_CHATS.FROM' | translate}} {{sender() | async}}</mat-card-title>
+  <mat-card-subtitle>{{'MY_RECEIVED_BTC_CHATS.AMOUNT' | translate}} {{amount() | async}}</mat-card-subtitle>
+  <mat-card-content>
+    <p> {{'MY_RECEIVED_BTC_CHATS.MESSAGE' | translate}} {{message() | async }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button
+            [disabled] = "isActive() | async"
+            (click)="markAsProcessed()">{{'MY_RECEIVED_BTC_CHATS.MARK_AS_PROCESSED' | translate}}</button>
+  </mat-card-actions>
+  <mat-card-footer>
+    <p> {{'MY_RECEIVED_BTC_CHATS.RECEIVED_AT' | translate}} {{receivedAt()}}</p>
+    <mat-progress-bar *ngIf="isActive() | async" mode="indeterminate"></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>

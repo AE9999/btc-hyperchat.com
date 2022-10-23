@@ -1,0 +1,61 @@
+<mat-card>
+  <mat-card-content>
+    <mat-toolbar>
+      <span>{{'SETTINGS.TITLE' | translate}}</span>
+    </mat-toolbar>
+
+    <mat-tab-group>
+
+      <mat-tab dynamicHeight>
+        <ng-template mat-tab-label>
+          <label  class="labelHeading"
+                  [matTooltip]="tooltip_configuration"
+                  matTooltipClass="example-tooltip-red1">{{'SETTINGS.CONFIGURATION_TAB_TITLE' | translate}}</label>
+        </ng-template>
+        <app-webhook-config-editor></app-webhook-config-editor>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <label  class="labelHeading"
+                  [matTooltip]="tooltip_activation"
+                  matTooltipClass="example-tooltip-red1">{{'SETTINGS.ACTIVATION_TAB_TITLE' | translate}}</label>
+        </ng-template>
+
+        <app-webhook-activation-editor></app-webhook-activation-editor>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <label  class="labelHeading"
+                  [matTooltip]="tooltip_test"
+                  matTooltipClass="example-tooltip-red1">{{'SETTINGS.TEST_TAB_TITLE' | translate}}</label>
+        </ng-template>
+        <app-webhook-test></app-webhook-test>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <label  class="labelHeading"
+                  [matTooltip]="tooltip_btc_pay"
+                  matTooltipClass="example-tooltip-red1">{{'SETTINGS.BTC_PAY_TITLE' | translate}}</label>
+        </ng-template>
+        <app-btc-pay-settings></app-btc-pay-settings>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <label  class="labelHeading"
+                  [matTooltip]="tooltip_account"
+                  matTooltipClass="example-tooltip-red1">{{'SETTINGS.ACCOUNT_TITLE' | translate}}</label>
+        </ng-template>
+        <app-account-settings></app-account-settings>
+      </mat-tab>
+
+    </mat-tab-group>
+
+  </mat-card-content>
+
+  <mat-card-footer>
+  </mat-card-footer>
+</mat-card>

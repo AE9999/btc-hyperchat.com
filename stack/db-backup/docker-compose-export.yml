@@ -1,0 +1,19 @@
+version: '3.7'
+services:
+  #
+  # BEGIN EXPORTER CONFIG
+  #
+  date-exporter:
+    image: ubuntu
+    volumes:
+      - ${BACKUP_DIR}:/backupDir
+      - my_external_volume:/target
+    command: tar cvf /backupDir/backup.tar /target
+  #
+  # END EXPORTER CONFIG
+  #
+
+volumes:
+  my_external_volume :
+    name: ${POSTGRES_VOLUME}
+    external: true

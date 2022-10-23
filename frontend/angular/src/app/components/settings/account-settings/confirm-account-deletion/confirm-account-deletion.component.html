@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>{{'CONFIRM_ACCOUNT_DELETION.TITLE' | translate}}</h1>
+<div mat-dialog-content>
+  <p>{{'CONFIRM_ACCOUNT_DELETION.EXPLANATION' | translate}}</p>
+  <mat-form-field appearance="fill">
+    <mat-label>{{'CONFIRM_ACCOUNT_DELETION.LABEL' | translate}}</mat-label>
+    <input matInput [(ngModel)]="data">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">{{'CONFIRM_ACCOUNT_DELETION.CANCEL' | translate}}</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>{{'CONFIRM_ACCOUNT_DELETION.OK' | translate}}</button>
+</div>

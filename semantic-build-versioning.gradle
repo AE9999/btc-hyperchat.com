@@ -1,0 +1,10 @@
+tagPrefix = 'v-'
+autobump {
+    majorPattern = ~/(?m)^\[major\]/
+    minorPattern = ~/(?m)^\[minor\]/
+    patchPattern = ~/(?m)^\[patch\]/
+}
+preRelease {
+    startingVersion = 'RC.0'
+    bump = { "RC.${((it - ~/^RC\./) as int) + 1}"}
+}

@@ -1,0 +1,30 @@
+<mat-card>
+  <mat-card-header>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      <span>{{'SETTINGS.BTCPAY_LOG_IN_PAGE' | translate}}</span>
+      <a [href]="btcPayUrl$ | async">here</a>
+    </p>
+    <p>
+      <span>{{'SETTINGS.BTCPAY_YOUR_CREDENTIALS_ARE' | translate }}</span>
+      <span [innerHtml]="credentials"></span>
+    </p>
+    <p>
+      <span> {{'SETTINGS.BTCPAY_PLEASE_CHANGE' | translate }}</span>
+    </p>
+
+    <mat-divider></mat-divider>
+
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary"
+            [matTooltip]="tooltip_btc_reset_account"
+            (click)="resetAccount()">
+      {{'SETTINGS.BTCPAY_RESET_ACCOUNT' | translate }}
+    </button>
+  </mat-card-actions>
+  <mat-card-footer>
+<!--    <mat-progress-bar *ngIf="testingWebhook$ | async" mode="indeterminate"></mat-progress-bar>-->
+  </mat-card-footer>
+</mat-card>

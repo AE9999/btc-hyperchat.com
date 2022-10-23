@@ -1,0 +1,39 @@
+<mat-toolbar color="primary">
+
+  <span>{{'MENU.APP_NAME' | translate}}</span>
+  <span class="example-spacer"></span>
+
+  <a mat-stroked-button routerLink="/home"
+     [matTooltip]="tooltip_home">
+    <span>{{'MENU.HOME' | translate}}</span>
+  </a>
+  <a mat-stroked-button routerLink="/tip"
+     [matTooltip]="tooltip_register_btc_chat">
+    <span>{{'MENU.REGISTER_BTC_CHAT' | translate}}</span>
+  </a>
+  <a mat-stroked-button routerLink="/read"
+     [matTooltip]="tooltip_read_chats">
+    <span>{{'MENU.READ' | translate}}</span>
+  </a>
+  <a mat-stroked-button routerLink="/settings"
+     [matTooltip]="tooltip_settings">
+    <span>{{'MENU.SETTINGS' | translate}}</span>
+  </a>
+
+  <a id="registerButton" *ngIf="!(loggedin$ | async)"
+     mat-stroked-button
+     [matTooltip]="tooltip_register"
+     (click)="register()">
+    <span>{{'MENU.REGISTER_ACCOUNT' | translate}}</span>
+  </a>
+
+  <a id="registerButton" *ngIf="(loggedin$ | async)"
+     mat-stroked-button
+     [matTooltip]="tooltip_logout"
+     (click)="logout()">
+    <span>{{'MENU.LOG_OUT' | translate}}</span>
+  </a>
+
+</mat-toolbar>
+
+<router-outlet></router-outlet>

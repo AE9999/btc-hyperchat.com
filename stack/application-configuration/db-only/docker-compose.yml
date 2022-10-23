@@ -1,0 +1,30 @@
+version: '3.7'
+services:
+
+  postgres-db:
+    image: postgres:14.5
+    container_name: ${POSTGRES_CONTAINER_NAME}
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_USER=${POSTGRES_USER}
+    volumes:
+      - my_external_volume:/var/lib/postgresql/data:Z
+
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - "5050:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    logging:
+      driver: "none"
+    links:
+      - postgres-db:pdb
+
+volumes:
+   my_external_volume :
+    name: ${POSTGRES_VOLUME}
+    external: true

@@ -1,0 +1,21 @@
+<mat-card>
+  <mat-card-header>
+  </mat-card-header>
+  <mat-card-content>
+  </mat-card-content>
+  <mat-card-actions>
+    <span [matTooltip]="tooltip_disabled"
+          [matTooltipDisabled]="!(noValidWebhook$ | async)">
+      <button mat-raised-button color="primary"
+              [matTooltip]="tooltip_test_button"
+              [matTooltipDisabled]="(noValidWebhook$ | async)"
+              [disabled]="(noValidWebhook$ | async) || (testingWebhook$ | async)"
+              (click)="testWebhook()">
+        {{'SETTINGS.WEB_HOOK_TEST_BUTTON' | translate }}
+      </button>
+    </span>
+  </mat-card-actions>
+  <mat-card-footer>
+    <mat-progress-bar *ngIf="testingWebhook$ | async" mode="indeterminate"></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>

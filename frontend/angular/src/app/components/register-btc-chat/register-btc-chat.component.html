@@ -1,0 +1,118 @@
+<mat-card>
+  <mat-card-content>
+
+    <div class="container"
+         fxLayout
+         fxLayoutAlign="left"
+         fxLayoutGap="10px">
+
+      <mat-toolbar>
+        <a routerLink=".."><mat-icon>arrow_back</mat-icon></a>
+        <span>{{'REGISTER.TIP' | translate}} {{(profile$ | async)?.username}}</span>
+      </mat-toolbar>
+    </div>
+
+    <div *ngIf="!(error$ | async); else error">
+        <mat-card>
+          <form [formGroup]="formGroup">
+
+            <div>
+              <div class="container"
+                   fxLayout
+                   fxLayoutAlign="left center"
+                   fxLayoutGap="5px">
+                <mat-form-field appearance="fill">
+                  <mat-label>{{'REGISTER.NAME' | translate}}</mat-label>
+                  <input matInput
+                         [formControlName]="'sender'"
+                         [placeholder]="'REGISTER.YOUR_NAME' | translate">
+                </mat-form-field>
+
+                <mat-slide-toggle formControlName="sendAnonymously"
+                                  (change)="toggleSendAnonymously($event)">
+                  {{'REGISTER.SEND_ANONYMOUSLY' | translate}}
+                </mat-slide-toggle>
+              </div>
+              <mat-error *ngIf="hasSenderError">
+                {{ 'REGISTER.REQUIRED_SENDER' | translate }}
+              </mat-error>
+            </div>
+
+            <div class="container"
+                 fxLayout
+                 fxLayoutAlign="left"
+                 fxLayoutGap="10px">
+              <mat-form-field appearance="fill">
+                <mat-label>{{'REGISTER.AMOUNT' | translate}}</mat-label>
+                <input matInput
+                       [formControlName]="'amount'"
+                       [placeholder]="'REGISTER.AMOUNT_DEFAULT' | translate">
+                <mat-error *ngIf="this.formGroup.get('amount')?.invalid">
+                  {{ 'REGISTER.REQUIRED_AMOUNT' | translate }}
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label>{{'REGISTER.CURRENCY' | translate}}</mat-label>
+                <mat-select  [formControlName]="'currency'">
+                  <mat-option *ngFor="let currency of (profile$ | async)?.currencies"
+                              [value]="currency">{{currency}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="container"
+                 fxLayout="column"
+                 fxLayoutAlign="left"
+                 fxLayoutGap="10px">
+              <!-- style="width: 1100px; height: 100px" -->
+
+
+                <mat-form-field appearance="fill">
+                  <mat-label>{{'REGISTER.MESSAGE_LABEL' | translate}}</mat-label>
+                  <div class="textarea-wrapper">
+                    <textarea matInput
+                              [maxlength]="200"
+                              [placeholder]="'REGISTER.MESSAGE_PLACEHOLDER' | translate"
+                              [formControlName]="'message'">
+                    </textarea>
+                    <span class="remaning">{{ remainingText }} / 200</span>
+                  </div>
+                </mat-form-field>
+
+            </div>
+
+            <div class="container"
+                 fxLayout
+                 fxLayoutAlign="left"
+                 fxLayoutGap="10px">
+              <span>{{'REGISTER.TOA' | translate}}</span>
+              <span [innerHtml]="'REGISTER.TOA_LINK' | translate"></span>
+            </div>
+
+          </form>
+          <mat-card-actions>
+              <button mat-raised-button
+                      color="primary"
+                      [disabled]="!formGroup.valid"
+                      (click)="tip()">
+                {{'REGISTER.TIP' | translate }} {{(profile$ | async)?.username}}
+              </button>
+          </mat-card-actions>
+        </mat-card>
+    </div>
+    <ng-template #error>
+      <p>{{'REGISTER.ERROR_SCREEN' | translate}}</p>
+    </ng-template>
+  </mat-card-content>
+
+  <mat-card-footer>
+      <mat-progress-bar *ngIf="(profileLoading$ | async)
+                                || (sendingBtcChat$ | async)
+                                || (modalLoading$ | async)" mode="indeterminate"></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>
+
+
+
+

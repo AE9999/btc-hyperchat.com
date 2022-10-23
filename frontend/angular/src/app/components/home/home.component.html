@@ -1,0 +1,26 @@
+<mat-toolbar>
+  <span>{{'HOME.TITLE' | translate}}</span>
+</mat-toolbar>
+
+<div *ngFor="let subject of ['EXPLANATION',
+                             'GUI_ONLY',
+                             'HOW_DOES_IT_WORK',
+                             'WHY_SHOULD_I_USE',
+                             'HOW_DO_I_REGISTER',
+                             'HOW_MUCH_DOES_IT_COST',
+                             'WHAT_DOES_A_DONATION_PAGE_LOOK_LIKE',
+                             'CAN_I_RUN_MY_OWN_INSTANCE',
+                             'PRIVACY_POLICY',
+                             'TERMS_OF_SERVICE'
+                            ]">
+  <mat-card>
+    <mat-card-title>
+      <p [innerHtml]="get_title(subject) | async"></p>
+    </mat-card-title>
+    <mat-card-content>
+      <p [innerHtml]="get_body(subject) | async"></p>
+    </mat-card-content>
+    <mat-card-footer>
+    </mat-card-footer>
+  </mat-card>
+</div>

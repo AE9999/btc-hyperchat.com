@@ -1,0 +1,123 @@
+version: '3.7'
+services:
+
+  postgres-db:
+    container_name: bit_chat_db
+    image: postgres:14.5
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_USER=${POSTGRES_USER}
+    volumes:
+      - my_external_volume:/var/lib/postgresql/data:Z
+    networks:
+      - postgres
+
+  pgadmin:
+    container_name: bit_chat_pgadmin
+    image: dpage/pgadmin4
+    ports:
+      - "5050:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
+    logging:
+      driver: "none"
+    links:
+      - postgres-db:pdb
+    networks:
+      - postgres
+
+  # TODO See if keycloak username & password can be deleted
+  btc-chat-backend:
+    container_name: bit_chat_backend
+    image: btc-chat-backend
+    environment:
+      - BTC_BACKEND_POSTGRES_USERNAME=${BTC_BACKEND_POSTGRES_USERNAME}
+      - BTC_BACKEND_POSTGRES_PASSWORD=${BTC_BACKEND_POSTGRES_PASSWORD}
+      - BTC_BACKEND_SERVER_PORT=${BTC_BACKEND_SERVER_PORT}
+      - BTC_BACKEND_SERVER_CORS_ALLOWED_ORIGIN=https://${HOSTNAME}
+      - BTC_BACKEND_KEYCLOAK_URL=${BTC_BACKEND_KEYCLOAK_URL}
+      - BTC_BACKEND_KEYCLOAK_USERNAME=${BTC_BACKEND_KEYCLOAK_USERNAME}
+      - BTC_BACKEND_KEYCLOAK_PASSWORD=${BTC_BACKEND_KEYCLOAK_PASSWORD}
+      - BTC_BACKEND_KEYCLOAK_REALM=${BTC_BACKEND_KEYCLOAK_REALM}
+    links:
+      - postgres-db:pdb
+    volumes:
+      - ${BTC_BACKEND_VOLUME_CONFIG_DIR}:/config
+      - ${BTC_BACKEND_VOLUME_CERTIFICATE_DIR}:/certs
+    command: "@/config/general.conf \
+              @/config/btc_pay.conf \
+              @/config/database.conf \
+              @/config/invoice.conf \
+              @/config/test_webhook.conf \
+              @/config/web_socket.conf \
+              --keycloak-public-key-file=/certs/pk.pem \
+              --postgres-host=pdb \
+              --postgres-database=btc_chat \
+              --btc-pay-callback-url-base=https://${HOSTNAME} \
+              --server-host=0.0.0.0 \
+              --server-callback-to-user-timeout=60 \
+              --keycloak-url=http://keycloak:8080/auth"
+    networks:
+      - postgres
+
+  # <THE-ABSOLUTE-PATH-TO-THIS-REPO>/keycloak/registration-event-listener/build
+  # https://github.com/keycloak/keycloak/discussions/13516
+  # https://www.keycloak.org/server/reverseproxy
+  # https://stackoverflow.com/questions/72426072/how-to-configure-keycloak-18-running-http-only-in-production-mode
+  keycloak:
+    container_name: bit_chat_keycloak
+    image: quay.io/keycloak/keycloak:19.0.1
+    volumes:
+      - ${KEYCLOAK_REGISTRATION_EVENT_LISTENER}:/opt/keycloak/providers/registration-event-listener.jar
+    links:
+      - postgres-db:pdb
+      - btc-chat-backend:backend
+    environment:
+      - KEYCLOAK_ADMIN=${KEYCLOAK_USER}
+      - KEYCLOAK_ADMIN_PASSWORD=${KEYCLOAK_PASSWORD}
+      - KEYCLOAK_BTC_CHAT_REGISTER_USER_USERNAME=${KEYCLOAK_BTC_CHAT_REGISTER_USER_USERNAME}
+      - KEYCLOAK_BTC_CHAT_REGISTER_USER_PASSWORD=${KEYCLOAK_BTC_CHAT_REGISTER_USER_PASSWORD}
+      - KEYCLOAK_BTC_CHAT_URL=http://backend:${BTC_BACKEND_SERVER_PORT}/api/user
+      # https://github.com/keycloak/keycloak/issues/12487
+      - HTTP_ADDRESS_FORWARDING='true'
+    command: start --hostname=${HOSTNAME} \
+                   --auto-build \
+                   --proxy edge \
+                   --db=${KEYCLOAK_DB} \
+                   --db-username=${POSTGRES_USER} \
+                   --db-password=${POSTGRES_PASSWORD} \
+                   --db-url-host=pdb  \
+                   --db-url-database=${KEYCLOAK_DB_SCHEMA} \
+                   --hostname-path=/auth \
+                   --http-relative-path=/auth \
+                   --http-enabled=true
+    networks:
+      - postgres
+
+
+  btc-chat-frontend:
+    container_name: btc_chat_frontend
+    image: btc-chat-frontend:latest
+    environment:
+      - SERVER_NAME=${HOSTNAME}
+      - API_LOCATION=http://backend:${BTC_BACKEND_SERVER_PORT}
+      - AUTH_LOCATION=http://keycloak:8080
+      - MAX_FILE_SIZE=5m # Is ignored due to some bullshit
+    links:
+      - btc-chat-backend:backend
+      - keycloak:keycloak
+    ports:
+      - ${INTERNAL_NGINX_PORT_80}:80
+    networks:
+      - postgres
+
+volumes:
+  my_external_volume :
+    name: ${POSTGRES_VOLUME}
+    external: true
+
+networks:
+  postgres:
+    driver: bridge
+
