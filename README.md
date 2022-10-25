@@ -1,6 +1,6 @@
 # About
 
-<a href="BTC-HyperChat.com">BTC-HyperChat.com</a> is an open source, Bitcoin based, Web application which allows users to get payed (in  Bitcoin) to receive and (possibly automatically) handle messages. It was developed to integrate with the <a href='https://streamlabs.com/'>streamlabs</a> but any one using software that allows for 'webhooks' or 'callbacks' can integrate it.
+<a href="BTC-HyperChat.com">BTC-HyperChat.com</a> is an open source, Bitcoin based, Web application which allows users to get payed (in  Bitcoin) to receive and (possibly automatically) handle messages. It was developed to integrate with the <a href='https://streamlabs.com/'>streamlabs</a> api but any one using software that allows for 'webhooks' or 'callbacks' can integrate it.
 
 # Happy Flow
 The basic workflow of our app is
