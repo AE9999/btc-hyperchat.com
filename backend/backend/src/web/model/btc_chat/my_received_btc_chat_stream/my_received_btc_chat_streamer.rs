@@ -70,8 +70,7 @@ impl MyReceivedBtcChatStreamer {
                                 session_id: usize,
                                 json_web_token: &str) {
         let _lock = self.mutex.lock();
-        log::info!("{:?} {:?}",
-                   LogEvents::MyReceivedBtcChatStreamerAuthenticationStart,
+        log::info!("{:?}",
                    json_web_token);
 
         let token_data =
