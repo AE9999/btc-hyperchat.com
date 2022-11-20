@@ -1,4 +1,4 @@
-FROM rust:1.60 as builder
+FROM rust:1.61 as builder
 RUN apt-get update && apt install -y cmake
 
 WORKDIR /usr/src/btcpay-rust
